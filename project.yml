@@ -1,0 +1,26 @@
+project: MyService
+Workspaces:
+- ResourceGroupWS:
+    name: "ResourceGroup"
+    layer: "Account Resources"
+    inputs:
+      resource_group_name: myservice_resource_group
+    outputs:
+      - resource_group_name
+    sourcerepo: https://github.com/Cloud-Schematics/terraform-ibm-instance-scheduler/tree/master/examples
+    tags:
+      - "project:MyService"
+      - "env:MyServiceStage"
+- IAMWS:
+    name: "IAM"
+    layer: "IAM"
+    inputs:
+      resource_group_name: ResourceGroupWS.outputs.resource_group_name
+      iam_role_map : 
+    outputs:
+      - access_group_id
+    sourcerepo: https://github.com/Cloud-Schematics/terraform-ibm-instance-scheduler/tree/master/examples
+    tags:
+      - "project:MyService"
+      - "env:MyServiceStage"
+
